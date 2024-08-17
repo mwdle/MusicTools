@@ -1,10 +1,10 @@
 # MusicTools  
 
-A small collection of basic tools and scripts for bulk management of a local music library.  
+A small collection of basic tools and scripts for management of a local music library.  
 
 ## Playlist Generator  
 
-This script allows you to quickly generate an m3u playlist containing all music in a given folder and subfolders.  
+This script allows you to quickly generate an m3u playlist containing all music in a given folder and subfolders. Has support for excluding files/folders using regex.  
 To learn more, execute the following from a shell in the same folder as this README:  
   ```python3 generatePlaylist.py --help``` or ```python3 generatePlaylist.py -h```  
 
