@@ -26,10 +26,10 @@ def generate_m3u_playlist(playlist_directory, music_directory, output_file, excl
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="This script allows you to generate an m3u playlist given a folder containing music and/or subfolders with music. The following example generates a playlist called Jazz.m3u in /home/user/Media/Music containing all songs in the Jazz folder/subfolders: python3 generatePlaylist.py '/home/user/Media/Music/Jazz' '/home/user/Media/Music' 'Jazz.m3u'")
-    parser.add_argument('playlist_directory', type=str, help="Path to the folder containing music/subfolders that you want to be added to the playlist.")
-    parser.add_argument('music_directory', type=str, help="Path to the folder containing audio files and/or subfolders with audio files. This is the location where you want to create the playlist file - the 'root' folder of your music library.")
+    parser.add_argument('playlist_directory', type=str, help="Path to the folder containing music/subfolders with music to add to the playlist.")
+    parser.add_argument('music_directory', type=str, help="Path to the folder where you want to create the playlist file - the 'root' folder of your music library.")
     parser.add_argument('output_file', type=str, help="Name of m3u file (including .m3u extension). Example: 'Jazz.m3u'")
-    parser.add_argument('exclusions', type=str, nargs='?', default="", help="(Optional) A regular expression to exclude specific folders and filenames from being added to the playlist. Leaving this empty will not exclude anything. The following example generates a playlist called 'Everything Except Jazz' containing all songs in the music folder except those matching 'Jazz': python3 generatePlaylist.py '/home/user/Media/Music' '/home/user/Media/Music' 'Everything Except Jazz.m3u' 'Jazz'")
+    parser.add_argument('exclusions', type=str, nargs='?', default="", help="(Optional) A regular expression to exclude specific folders and filenames from being added to the playlist. Leaving this empty will not exclude anything. The following example generates a playlist called 'Everything Except Jazz.m3u' containing all songs in the music library folder except those matching 'Jazz': python3 generatePlaylist.py '/home/user/Media/Music' '/home/user/Media/Music' 'Everything Except Jazz.m3u' 'Jazz'")
     
     args = parser.parse_args()
     
