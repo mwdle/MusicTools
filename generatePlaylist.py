@@ -1,10 +1,14 @@
 import os
 import argparse
 import re
-from mutagen.mp3 import MP3
-from mutagen.oggvorbis import OggVorbis
+from mutagen.mp3 import MP3 # pip install mutagen
+from mutagen.oggvorbis import OggVorbis # pip install mutagen
 
-def get_duration(file_path):
+def get_song_duration(file_path):
+    """
+    Returns the duration in seconds of an mp3 or ogg file.
+    """
+    audio = None;
     if file_path.lower().endswith('.mp3'):
         audio = MP3(file_path)
     if file_path.lower().endswith('.ogg'):
@@ -12,15 +16,21 @@ def get_duration(file_path):
     return audio.info.length
 
 def generate_m3u_playlist(playlist_directory, music_directory, output_file, exclusions):
+    """
+    Generates an m3u playlist with the given filename in the given directory. 
+    The playlist file will contain relative paths and other information for all files with matching extensions in the given music directory, not including any provided exclusions.
+    """
     with open(f"{music_directory}{os.path.sep}{output_file}", 'w', encoding='utf-8') as playlist:
+        # Playlist Header
         playlist.write("#EXTM3U\n")
+        # For every file with a matching extension, add a line to the playlist containing the song length, song name (assumes the file name excluding extension is the song name), and the relative path to the file.
         for root, _, files in os.walk(playlist_directory):
             for file in files:
                 if file.lower().endswith('.ogg') or file.lower().endswith('.mp3'):
                     song_path = os.path.join(root, file)
                     if exclusions != "" and re.search(exclusions, song_path):
                         continue
-                    song_length = int(get_duration(song_path))
+                    song_length = int(get_song_duration(song_path))
                     relative_path = os.path.relpath(song_path, music_directory)
                     playlist.write(f"#EXTINF:{song_length}, {file[:-4]}\n{relative_path}\n");
 
