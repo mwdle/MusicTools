@@ -20,6 +20,9 @@ def generate_m3u_playlist(playlist_directory, music_directory, output_file, excl
     Generates an m3u playlist with the given filename in the given directory. 
     The playlist file will contain relative paths and other information for all files with matching extensions in the given music directory, not including any provided exclusions.
     """
+    # Ensure that the directories exist
+    os.makedirs(music_directory, exist_ok=True)
+    
     with open(f"{music_directory}{os.path.sep}{output_file}", 'w', encoding='utf-8') as playlist:
         # Playlist Header
         playlist.write("#EXTM3U\n")
